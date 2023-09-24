@@ -6,7 +6,7 @@ const chatSchema = new mongoose.Schema({
     title: { type: String, required: true },
     content: [{ sender: String, text: String }]
 });
-
+console.log("chat schema", chatSchema)
 const userSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
