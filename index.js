@@ -18,23 +18,23 @@ const MONGODB_URI = `mongodb+srv://hamzabajwa:${process.env.DB_PASSWORD}@chatbot
 
 
 mongoose.connect(MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  });
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 mongoose.connection.on("connected", () => {
-    console.log("Connected to MongoDB!");
-  }); 
+  console.log("Connected to MongoDB!");
+});
 
 mongoose.connection.on("error", (error) => {
-    console.log("Failed to connect to MongoDB: ", error);
-  });
+  console.log("Failed to connect to MongoDB: ", error);
+});
 
 app.get('/', (req, res) => {                                           // For checking if the server is running in the browser by going to http://localhost:5000/
-    res.send('Server is running');
+  res.send('Server is running');
 });
 
 
 app.listen(PORT, () => {                                               // It says backend to listen to the requests that come at the port 5000.
-    console.log(`Server started on http://localhost:${PORT}`);
+  console.log(`Server started on http://localhost:${PORT}`);
 });
