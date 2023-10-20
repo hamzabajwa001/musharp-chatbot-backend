@@ -31,7 +31,7 @@ app.use('/api', userRoutes);
 // });
 
 app.get('/', (req, res) => {                                           // For checking if the server is running in the browser by going to http://localhost:5000/
-  res.send('Server is running');
+  res.send('Server is runnning');
 });
 
 
