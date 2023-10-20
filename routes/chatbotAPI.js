@@ -38,7 +38,7 @@ router.post('/sendMessage', async (req, res) => {
         //     { "role": "user", "content": userMessage }
         // ];
         let apiMessages = [
-            { "role": "system", "content": "You are the virtual assistant representing muSharp. Keep responses concise and to the point. Dont write long details" },
+            { "role": "system", "content": "You are an assistant representing muSharp. Keep responses concise and to the point. Dont write long details" },
             { "role": "system", "content": DialogFlowReply },
             { "role": "user", "content": userMessage }
         ];
@@ -65,9 +65,7 @@ router.post('/sendMessage', async (req, res) => {
             const openaiData = await openaiResponse.json();
 
             const botReply = openaiData.choices[0].message.content.trim();
-            // const botReply = result.intent.isFallback ? "Ask me Questions related to muSharp" : openaiData.choices[0].message.content.trim();
-
-
+            
             apiMessages.push({ "role": "assistant", "content": botReply });
 
             // Check if there is a custom payload
