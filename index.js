@@ -2,7 +2,7 @@ require('dotenv').config()
 const cors = require('cors');
 const axios = require('axios');
 const express = require('express');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 // const User = require('./models/user'); 
 const userRoutes = require('./routes/chatbotAPI');
 
@@ -13,22 +13,22 @@ app.use(cors());                                                         // This
 app.use(express.json());
 app.use('/api', userRoutes);
 
-// const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/chatbotdatabase";  
-const MONGODB_URI = `mongodb+srv://hamzabajwa:${process.env.DB_PASSWORD}@chatbotcluster.lnqgyhj.mongodb.net/chatbotdatabase?retryWrites=true&w=majority`;
+// // const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/chatbotdatabase";  
+// const MONGODB_URI = `mongodb+srv://hamzabajwa:${process.env.DB_PASSWORD}@chatbotcluster.lnqgyhj.mongodb.net/chatbotdatabase?retryWrites=true&w=majority`;
 
 
-mongoose.connect(MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+// mongoose.connect(MONGODB_URI, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true
+// });
 
-mongoose.connection.on("connected", () => {
-  console.log("Connected to MongoDB!");
-});
+// mongoose.connection.on("connected", () => {
+//   console.log("Connected to MongoDB!");
+// });
 
-mongoose.connection.on("error", (error) => {
-  console.log("Failed to connect to MongoDB: ", error);
-});
+// mongoose.connection.on("error", (error) => {
+//   console.log("Failed to connect to MongoDB: ", error);
+// });
 
 app.get('/', (req, res) => {                                           // For checking if the server is running in the browser by going to http://localhost:5000/
   res.send('Server is running');
