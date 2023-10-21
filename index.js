@@ -33,6 +33,7 @@ app.use('/api', userRoutes);
 //   console.log("Failed to connect to MongoDB: ", error);
 // });
 
+console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS,"GOOGLE_APPLICATION_CREDENTIALS")
 app.get('/', (req, res) => {                                           // For checking if the server is running in the browser by going to http://localhost:5000/
   res.send('Server is Runnning');
 });
