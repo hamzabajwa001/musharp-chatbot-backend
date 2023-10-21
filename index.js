@@ -15,6 +15,7 @@ app.use(express.json());
 
 app.use('/api', userRoutes);
 
+
 // // const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/chatbotdatabase";  
 // const MONGODB_URI = `mongodb+srv://hamzabajwa:${process.env.DB_PASSWORD}@chatbotcluster.lnqgyhj.mongodb.net/chatbotdatabase?retryWrites=true&w=majority`;
 
