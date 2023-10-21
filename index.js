@@ -13,11 +13,6 @@ console.log("test backend server running")
 app.use(cors());                                                         // This helps to deal with CORS issues when your frontend communicates with the backend.
 app.use(express.json());
 
-app.get('/test-log', (req, res) => {
-  console.log('Test backend server running');
-  res.send('Log statement triggered');
-});
-
 app.use('/api', userRoutes);
 
 // // const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/chatbotdatabase";  
