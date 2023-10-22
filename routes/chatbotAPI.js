@@ -65,7 +65,7 @@
 //             const openaiData = await openaiResponse.json();
 
 //             const botReply = openaiData.choices[0].message.content.trim();
-            
+
 //             apiMessages.push({ "role": "assistant", "content": botReply });
 
 //             // Check if there is a custom payload
@@ -165,7 +165,7 @@
 //             const openaiData = await openaiResponse.json();
 
 //             const botReply = openaiData.choices[0].message.content.trim();
-            
+
 //             apiMessages.push({ "role": "assistant", "content": botReply });
 
 //             // Check if there is a custom payload
@@ -230,8 +230,6 @@ require('dotenv').config()
 const express = require('express');
 const router = express.Router();
 const { SessionsClient } = require('@google-cloud/dialogflow')
-
-
 const projectId = 'musharp-iabf';
 const dialogflowCredentials = JSON.parse(process.env.DIALOGFLOW_CREDENTIALS);
 
@@ -255,14 +253,7 @@ router.post('/sendMessage', async (req, res) => {
     try {
         const responses = await sessionClient.detectIntent(request);
         const result = responses[0].queryResult;
-        console.log(result)
         const DialogFlowReply = result.fulfillmentText;
-        console.log(DialogFlowReply)                               
-
-        // let apiMessages = [
-        //     { "role": "system", "content": DialogFlowReply },
-        //     { "role": "user", "content": userMessage }
-        // ];
         let apiMessages = [
             { "role": "system", "content": "You are an assistant representing muSharp. Keep responses concise and to the point. Dont write long details" },
             { "role": "system", "content": DialogFlowReply },
@@ -291,26 +282,23 @@ router.post('/sendMessage', async (req, res) => {
             const openaiData = await openaiResponse.json();
 
             const botReply = openaiData.choices[0].message.content.trim();
-            
+
             apiMessages.push({ "role": "assistant", "content": botReply });
 
             // Check if there is a custom payload
             if (result.fulfillmentMessages) {
-                console.log("1")
                 for (let message of result.fulfillmentMessages) {
                     if (message.payload) {
-                        console.log("2")
                         const bypassOpenAI = message.payload.fields.bypassOpenAI.boolValue;
                         const customMessage = message.payload.fields.message.stringValue;
                         if (bypassOpenAI) {
-                            console.log("3")
-                           res.json({ reply: DialogFlowReply });
+                            res.json({ reply: DialogFlowReply });
                             return;
                         }
                     }
                 }
             }
-                res.json({ reply: botReply });
+            res.json({ reply: botReply });
 
         } catch (error) {
             {
@@ -323,7 +311,6 @@ router.post('/sendMessage', async (req, res) => {
         console.error("Error communicating with Dialogflow:", error);
         res.status(500).json({ error: "Failed to get response from Dialogflow." });
     }
-
 });
 
 module.exports = router;
