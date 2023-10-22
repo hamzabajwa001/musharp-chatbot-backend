@@ -5,8 +5,20 @@ const express = require('express');
 const router = express.Router();
 const { SessionsClient } = require('@google-cloud/dialogflow')
 const projectId = 'musharp-iabf';
-const dialogflowCredentialsPath = process.env.DIALOGFLOW_CREDENTIALS;
-const credentials = JSON.parse(fs.readFileSync(dialogflowCredentialsPath, 'utf8'));
+let credentials
+
+if (process.env.NODE_ENV === 'development') {
+    // In development, DIALOGFLOW_CREDENTIALS is a path to the JSON file
+    const fs = require('fs');
+    const dialogflowCredentialsPath = process.env.DIALOGFLOW_CREDENTIALS;
+    credentials = JSON.parse(fs.readFileSync(dialogflowCredentialsPath, 'utf8'));
+} else {
+    // In production, DIALOGFLOW_CREDENTIALS is the JSON content
+    credentials = JSON.parse(process.env.DIALOGFLOW_CREDENTIALS);
+}
+
+// const credentials = fs.readFileSync(dialogflowCredentialsPath, 'utf8');
+console.log(credentials,"credentials")
 router.post('/sendMessage', async (req, res) => {
     const userMessage = req.body.message;
 
