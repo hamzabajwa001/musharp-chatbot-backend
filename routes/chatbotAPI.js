@@ -17,14 +17,12 @@ if (process.env.NODE_ENV === 'development') {
     credentials = JSON.parse(process.env.DIALOGFLOW_CREDENTIALS);
 }
 
-// const credentials = fs.readFileSync(dialogflowCredentialsPath, 'utf8');
-console.log(credentials,"credentials")
 router.post('/sendMessage', async (req, res) => {
     const userMessage = req.body.message;
-
+    const sessionId=req.body.sessionId;
     // Create a new session
     const sessionClient = new SessionsClient({ credentials: credentials });
-    const sessionPath = sessionClient.projectAgentSessionPath(projectId, 12345); // Session ID can be random or based on user
+    const sessionPath = sessionClient.projectAgentSessionPath(projectId, sessionId); // Session ID can be random or based on user
 
     const request = {
         session: sessionPath,
