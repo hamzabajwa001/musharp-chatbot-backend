@@ -1,16 +1,18 @@
 
 require('dotenv').config()
+const fs = require('fs');
 const express = require('express');
 const router = express.Router();
 const { SessionsClient } = require('@google-cloud/dialogflow')
 const projectId = 'musharp-iabf';
-const dialogflowCredentials = process.env.DIALOGFLOW_CREDENTIALS
+const dialogflowCredentialsPath = process.env.DIALOGFLOW_CREDENTIALS;
+const credentials = JSON.parse(fs.readFileSync(dialogflowCredentialsPath, 'utf8'));
 router.post('/sendMessage', async (req, res) => {
     console.log(req.body.sessionId,"SESSION ID")
     const userMessage = req.body.message;
 
     // Create a new session
-    const sessionClient = new SessionsClient({ credentials: dialogflowCredentials });
+    const sessionClient = new SessionsClient({ credentials: credentials });
     const sessionPath = sessionClient.projectAgentSessionPath(projectId, 12345); // Session ID can be random or based on user
 
     const request = {
