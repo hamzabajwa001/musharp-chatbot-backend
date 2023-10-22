@@ -11,7 +11,8 @@ router.post('/sendMessage', async (req, res) => {
 
     // Create a new session
     const sessionClient = new SessionsClient({ credentials: dialogflowCredentials });
-    const sessionPath = sessionClient.projectAgentSessionPath(projectId, '123456'); // Session ID can be random or based on user
+    const sessionId = Math.random().toString(36).substring(7);
+    const sessionPath = sessionClient.projectAgentSessionPath(projectId, sessionId); // Session ID can be random or based on user
 
     const request = {
         session: sessionPath,
