@@ -4,15 +4,14 @@ const express = require('express');
 const router = express.Router();
 const { SessionsClient } = require('@google-cloud/dialogflow')
 const projectId = 'musharp-iabf';
-const dialogflowCredentials = JSON.parse(process.env.DIALOGFLOW_CREDENTIALS);
-
+const dialogflowCredentials = process.env.DIALOGFLOW_CREDENTIALS
 router.post('/sendMessage', async (req, res) => {
+    console.log(req.body.sessionId,"SESSION ID")
     const userMessage = req.body.message;
 
     // Create a new session
     const sessionClient = new SessionsClient({ credentials: dialogflowCredentials });
-    const sessionId = Math.random().toString(36).substring(7);
-    const sessionPath = sessionClient.projectAgentSessionPath(projectId, sessionId); // Session ID can be random or based on user
+    const sessionPath = sessionClient.projectAgentSessionPath(projectId, 12345); // Session ID can be random or based on user
 
     const request = {
         session: sessionPath,
