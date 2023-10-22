@@ -8,7 +8,6 @@ const projectId = 'musharp-iabf';
 const dialogflowCredentialsPath = process.env.DIALOGFLOW_CREDENTIALS;
 const credentials = JSON.parse(fs.readFileSync(dialogflowCredentialsPath, 'utf8'));
 router.post('/sendMessage', async (req, res) => {
-    console.log(req.body.sessionId,"SESSION ID")
     const userMessage = req.body.message;
 
     // Create a new session
